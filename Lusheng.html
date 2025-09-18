@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USSR DVD Screensaver</title>
+<style>
+  html, body {
+    margin:0; padding:0;
+    width:100%; height:100%;
+    overflow:hidden;
+    background:black;
+    font-family: Arial, sans-serif;
+  }
+  .dvd {
+    position:absolute;
+    width:150px;
+    height:150px;
+    background: url('7.png') no-repeat center center;
+    background-size: contain;
+    border-radius:10px;
+    transition: transform 0.1s linear;
+  }
+  .buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display:flex;
+    gap: 15px;
+    z-index: 999;
+  }
+  .buttons button {
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #D32F2F;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .buttons button:hover {
+    background: #B71C1C;
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="8.mp3" type="audio/mpeg">
+</audio>
+
+<div class="buttons">
+  <button onclick="location.href='1/index.html'">1</button>
+  <button onclick="location.href='2/index.html'">2</button>
+  <button onclick="location.href='3/index.html'">3</button>
+  <button onclick="location.href='4/index.html'">4</button>
+  <button onclick="location.href='5/index.html'">5</button>
+  <button onclick="location.href='6/index.html'">6</button>
+</div>
+
+<script>
+  const logos = [];
+
+  function randomColor() {
+    const r = 200 + Math.floor(Math.random()*55);
+    const g = Math.floor(Math.random()*50);
+    const b = Math.floor(Math.random()*50);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  function createLogo() {
+    const dvd = document.createElement('div');
+    dvd.classList.add('dvd');
+
+    dvd.x = Math.random() * (window.innerWidth - 150);
+    dvd.y = Math.random() * (window.innerHeight - 150);
+    dvd.dx = Math.random() < 0.5 ? 3 : -3;
+    dvd.dy = Math.random() < 0.5 ? 3 : -3;
+    dvd.angle = 0;
+    dvd.spin = (Math.random() * 2 - 1) * 2;
+
+    dvd.style.left = dvd.x + 'px';
+    dvd.style.top = dvd.y + 'px';
+    dvd.style.filter = `drop-shadow(0 0 10px ${randomColor()})`;
+
+    document.body.appendChild(dvd);
+    logos.push(dvd);
+  }
+
+  createLogo();
+  setInterval(createLogo, 30000);
+
+  function animate() {
+    logos.forEach(dvd => {
+      dvd.x += dvd.dx;
+      dvd.y += dvd.dy;
+
+      if(dvd.x <=0 || dvd.x >= window.innerWidth - dvd.offsetWidth) {
+        dvd.dx = -dvd.dx;
+        dvd.style.filter = `drop-shadow(0 0 10px ${randomColor()})`;
+      }
+      if(dvd.y <=0 || dvd.y >= window.innerHeight - dvd.offsetHeight) {
+        dvd.dy = -dvd.dy;
+        dvd.style.filter = `drop-shadow(0 0 10px ${randomColor()})`;
+      }
+
+      dvd.angle += dvd.spin;
+      dvd.style.transform = `rotate(${dvd.angle}deg)`;
+
+      dvd.style.left = dvd.x + 'px';
+      dvd.style.top = dvd.y + 'px';
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    logos.forEach(dvd => {
+      if(dvd.x > window.innerWidth - dvd.offsetWidth) dvd.x = window.innerWidth - dvd.offsetWidth;
+      if(dvd.y > window.innerHeight - dvd.offsetHeight) dvd.y = window.innerHeight - dvd.offsetHeight;
+    });
+  });
+
+  // Key press navigation for folders 1-6
+  document.addEventListener('keydown', (e) => {
+    if(e.key === '1') window.location.href = '1/index.html';
+    if(e.key === '2') window.location.href = '2/index.html';
+    if(e.key === '3') window.location.href = '3/index.html';
+    if(e.key === '4') window.location.href = '4/index.html';
+    if(e.key === '5') window.location.href = '5/index.html';
+    if(e.key === '6') window.location.href = '6/index.html';
+  });
+</script>
+
+</body>
+</html>

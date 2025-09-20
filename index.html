@@ -2,77 +2,278 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cold War Proxy Wars</title>
+  <title>Proxy Wars Project</title>
   <style>
-    body {font-family: Arial, sans-serif; background-color: #f0f8ff; margin: 0; padding: 0;}
-    header {background-color: #4682b4; color: white; padding: 20px; text-align: center;}
-    nav {background-color: #87cefa; padding: 10px; text-align: center;}
-    nav a {margin: 0 10px; color: white; text-decoration: none; font-weight: bold;}
-    nav a:hover {text-decoration: underline;}
-    main {padding: 20px;}
-    h1 {color: #333;}
-    h2 {color: #555;}
-    ul {margin-left: 20px;}
-    li {margin-bottom: 5px;}
-    footer {text-align: center; padding: 10px; background-color: #4682b4; color: white; margin-top: 20px;}
-    .card {background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); margin-bottom: 15px;}
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slides {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      transform: translateY(0);
+      transition: transform 1s ease-in-out;
+      z-index: 1;
+    }
+
+    .slide {
+      height: 100vh;
+      width: 100vw;
+      padding: 80px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .slide h1 {
+      font-size: 3.2em;
+      margin-bottom: 25px;
+    }
+
+    .slide p {
+      font-size: 1.2em;
+      max-width: 1000px;
+      line-height: 1.7;
+      margin: 12px auto;
+    }
+
+    .page-marker {
+      position: absolute;
+      bottom: 30px;
+      right: 50px;
+      font-size: 1em;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Cold War Proxy Wars</h1>
-    <p>Learn what proxy wars were and how they affected the world!</p>
-  </header>
+  <canvas id="flags"></canvas>
 
-  <nav>
-    <a href="vietnam.html">Vietnam</a>
-    <a href="afghanistan.html">Afghanistan</a>
-    <a href="korea.html">Korea</a>
-    <a href="angola.html">Angola</a>
-    <a href="nicaragua.html">Nicaragua</a>
-  </nav>
-
-  <main>
-    <div class="card">
-      <h2>What is a Proxy War?</h2>
-      <p>A proxy war is a conflict where big countries like the US and USSR support smaller countries or groups to fight each other without fighting directly. During the Cold War, this was a way to spread influence without starting a full-scale world war.</p>
+  <div class="slides" id="slides">
+    <div class="slide">
+      <h1>What Are Proxy Wars?</h1>
+      <p>
+        A proxy war is when two powerful nations compete indirectly by supporting different sides in another country’s conflict. 
+        Instead of fighting each other directly, they give money, weapons, and training. 
+        Proxy wars were especially common during the Cold War between the U.S. and the Soviet Union.
+      </p>
+      <p>
+        These wars allowed the superpowers to spread their influence (capitalism vs. communism) 
+        without risking a nuclear world war. But for the countries where they happened, the cost was huge: 
+        millions of lives lost, destroyed economies, and political chaos.
+      </p>
+      <p>
+        Proxy wars are important to study because they show how global politics shapes local conflicts, 
+        how outside intervention can drag wars out for decades, and how the people most affected 
+        are usually the civilians trapped in the middle.
+      </p>
+      <div class="page-marker">Page 1 / 6</div>
     </div>
 
-    <div class="card">
-      <h2>Why They Happened</h2>
-      <ul>
-        <li>US and USSR wanted to spread capitalism vs communism</li>
-        <li>Direct war could cause too much destruction</li>
-        <li>Smaller countries were influenced or armed by superpowers</li>
-      </ul>
+    <div class="slide">
+      <h1>Korean War (1950–1953)</h1>
+      <p>
+        North Korea, backed by the Soviet Union and later China, invaded South Korea, which was supported by the United States and the United Nations. 
+        This was the first major proxy war of the Cold War and set the stage for decades of indirect superpower conflict.
+      </p>
+      <p>
+        The war demonstrated the U.S. policy of "containment" in action, as America fought to stop the spread of communism. 
+        The involvement of Chinese troops on the North Korean side showed how dangerous escalation could become, raising fears of World War III.
+      </p>
+      <p>
+        Over 3 million people died, and Korea remains divided to this day at the Demilitarized Zone (DMZ). 
+        This division shaped geopolitics in Asia for the next seventy years, with South Korea becoming a close U.S. ally 
+        while North Korea grew into one of the most isolated dictatorships in the world.
+      </p>
+      <div class="page-marker">Page 2 / 6</div>
     </div>
 
-    <div class="card">
-      <h2>Major Proxy Wars</h2>
-      <ul>
-        <li><a href="vietnam.html">Vietnam War</a></li>
-        <li><a href="afghanistan.html">Afghanistan War</a></li>
-        <li><a href="korea.html">Korean War</a></li>
-        <li><a href="angola.html">Angolan Civil War</a></li>
-        <li><a href="nicaragua.html">Nicaraguan Conflict</a></li>
-      </ul>
+    <div class="slide">
+      <h1>Vietnam War (1955–1975)</h1>
+      <p>
+        North Vietnam, backed by the USSR and China, fought against South Vietnam, which was supported by the United States. 
+        The U.S. sent over half a million troops at the height of the war, making it one of the largest proxy conflicts in history.
+      </p>
+      <p>
+        The Viet Cong’s guerrilla tactics and the determination of the North Vietnamese proved extremely difficult to overcome. 
+        Despite America’s superior technology, the war dragged on for twenty years and drained U.S. resources, morale, and political stability.
+      </p>
+      <p>
+        The war ended with the fall of Saigon in 1975 and a communist victory. 
+        Vietnam was reunified, but the U.S. suffered its first major military defeat, which reshaped its foreign policy. 
+        Domestically, the war caused mass protests, distrust in government, and a "Vietnam Syndrome" that made future interventions controversial.
+      </p>
+      <div class="page-marker">Page 3 / 6</div>
     </div>
-  </main>
 
-  <footer>&copy; sovietunion</footer>
+    <div class="slide">
+      <h1>Afghanistan (1979–1989)</h1>
+      <p>
+        The Soviet Union invaded Afghanistan to support a struggling communist government, sparking a decade-long conflict. 
+        The United States, Pakistan, and Saudi Arabia funded and armed the Mujahideen resistance fighters.
+      </p>
+      <p>
+        The war became known as the "Soviet Union’s Vietnam" because it drained resources, damaged morale, and turned global opinion against Moscow. 
+        The U.S. supplied weapons like the Stinger missile, which allowed rebels to shoot down Soviet helicopters, changing the tide of battle.
+      </p>
+      <p>
+        The Soviets eventually withdrew in 1989, a major humiliation that accelerated the USSR’s collapse two years later. 
+        However, the power vacuum left behind contributed to decades of instability in Afghanistan, eventually giving rise to the Taliban and later global terrorism.
+      </p>
+      <div class="page-marker">Page 4 / 6</div>
+    </div>
+
+    <div class="slide">
+      <h1>Angolan Civil War (1975–2002)</h1>
+      <p>
+        After Portugal gave up its colony, Angola fell into a brutal civil war. 
+        The U.S. and South Africa supported the UNITA rebels, while the Soviet Union and Cuba backed the MPLA government. 
+        Cuba even sent tens of thousands of soldiers, making it one of the most internationalized proxy wars of the Cold War.
+      </p>
+      <p>
+        Angola became a battlefield not just for ideology, but also for resources like oil and diamonds. 
+        The conflict dragged on for decades, even after the Cold War ended, showing how proxy wars can take on a life of their own.
+      </p>
+      <p>
+        The war only ended in 2002 after massive destruction, the deaths of hundreds of thousands, and the displacement of millions. 
+        It left Angola deeply scarred, but also rich in lessons about how superpower rivalries could devastate smaller nations.
+      </p>
+      <div class="page-marker">Page 5 / 6</div>
+    </div>
+
+    <div class="slide">
+      <h1>Nicaraguan Contra War (1981–1990)</h1>
+      <p>
+        In Nicaragua, the left-wing Sandinista government came to power after overthrowing a dictatorship. 
+        The U.S. opposed the Sandinistas, seeing them as aligned with Cuba and the Soviet Union, and funded the right-wing Contra rebels.
+      </p>
+      <p>
+        This led to a long, bloody conflict inside Nicaragua. 
+        The U.S. role became highly controversial at home after the Iran-Contra scandal was exposed, 
+        where American officials secretly sold weapons to Iran and funneled the money to the Contras, bypassing Congress.
+      </p>
+      <p>
+        The war left deep divisions in Nicaragua’s politics and economy. 
+        Although elections eventually brought peace, the scars of the Contra War are still felt today, 
+        showing how Cold War proxy wars shaped Latin America’s political landscape for decades.
+      </p>
+      <div class="page-marker">Page 6 / 6</div>
+    </div>
+  </div>
 
   <script>
-    // Secret keyboard sequence: "sovietunion" redirects to Lusheng.html
-    let typed = '';
-    const secret = 'sovietunion';
-    document.addEventListener('keydown', function(e) {
-      typed += e.key.toLowerCase();
-      if (typed.length > secret.length) typed = typed.slice(-secret.length);
-      if (typed === secret) {
-        window.location.href = 'Lusheng.html';
+    // ----- Slide System -----
+    const slides = document.getElementById("slides");
+    const totalSlides = document.querySelectorAll(".slide").length;
+    let current = 0;
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" && current < totalSlides - 1) {
+        current++;
+        slides.style.transform = `translateY(-${current * 100}vh)`;
+      } else if (e.key === "ArrowUp" && current > 0) {
+        current--;
+        slides.style.transform = `translateY(-${current * 100}vh)`;
       }
     });
+
+    // ----- Flag Bouncing & Collision -----
+    const canvas = document.getElementById("flags");
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    const flags = [];
+    const flagSrcs = [
+      "https://flagcdn.com/w320/us.png",
+      "https://flagcdn.com/w320/ru.png"
+    ];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    class Flag {
+      constructor(img) {
+        this.img = img;
+        this.x = Math.random() * (width - 200);
+        this.y = Math.random() * (height - 120);
+        this.dx = (Math.random() - 0.5) * 4;
+        this.dy = (Math.random() - 0.5) * 4;
+        this.size = 250;
+      }
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
+
+        if (this.x < 0 || this.x + this.size > width) this.dx *= -1;
+        if (this.y < 0 || this.y + this.size * 0.6 > height) this.dy *= -1;
+      }
+      draw() {
+        ctx.globalAlpha = 0.35;
+        ctx.drawImage(this.img, this.x, this.y, this.size, this.size * 0.6);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function handleCollisions() {
+      for (let i = 0; i < flags.length; i++) {
+        for (let j = i + 1; j < flags.length; j++) {
+          const a = flags[i];
+          const b = flags[j];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const distance = Math.hypot(dx, dy);
+
+          if (distance < a.size * 0.6) {
+            // swap velocities (elastic collision approximation)
+            [a.dx, b.dx] = [b.dx, a.dx];
+            [a.dy, b.dy] = [b.dy, a.dy];
+          }
+        }
+      }
+    }
+
+    Promise.all(flagSrcs.map(src => {
+      return new Promise(res => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => res(img);
+      });
+    })).then(images => {
+      for (let img of images) {
+        flags.push(new Flag(img));
+      }
+      animate();
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      handleCollisions();
+      for (let flag of flags) {
+        flag.update();
+        flag.draw();
+      }
+      requestAnimationFrame(animate);
+    }
   </script>
 </body>
 </html>

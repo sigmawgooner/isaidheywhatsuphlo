@@ -10,6 +10,9 @@
       font-family: Arial, sans-serif;
       background: black;
       color: white;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     canvas {
@@ -285,7 +288,6 @@
 
   <script>
     // ----- Brainrot Phrases and Image System -----
-    // Create a mapping of phrases to image numbers
     const phraseToImageMap = {
       "skibiditoilet": 100,
       "ohio": 101,
@@ -398,6 +400,7 @@
     closeBrainrot.addEventListener('click', () => {
       brainrotViewer.style.display = 'none';
       currentInput = '';
+      document.body.style.background = "black"; // reset background
     });
     
     // Also close if clicking outside the image
@@ -405,6 +408,7 @@
       if (e.target === brainrotViewer) {
         brainrotViewer.style.display = 'none';
         currentInput = '';
+        document.body.style.background = "black"; // reset background
       }
     });
     
@@ -427,13 +431,10 @@
     });
     
     function checkForPhraseMatch() {
-      // Check if current input matches any brainrot phrase
       if (phraseToImageMap.hasOwnProperty(currentInput)) {
         const imageNumber = phraseToImageMap[currentInput];
         showBrainrotImage(imageNumber);
       }
-      
-      // Reset input
       currentInput = '';
     }
     
@@ -441,9 +442,15 @@
       // Show the viewer
       brainrotViewer.style.display = 'flex';
       
-      // Set the image source
+      // Set the image source in the popup
       brainrotImage.src = `${imageNumber}.png`;
       brainrotCounter.textContent = `${imageNumber}.png`;
+
+      // ALSO set the background
+      document.body.style.backgroundImage = `url(${imageNumber}.png)`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundRepeat = "no-repeat";
     }
 
     // ----- Slide System -----
@@ -452,7 +459,6 @@
     let current = 0;
 
     window.addEventListener("keydown", (e) => {
-      // Only process arrow keys if brainrot viewer is not visible
       if (brainrotViewer.style.display !== 'flex') {
         if (e.key === "ArrowDown" && current < totalSlides - 1) {
           current++;
@@ -463,88 +469,6 @@
         }
       }
     });
-
-    // ----- Flag Bouncing & Collision -----
-    const canvas = document.getElementById("flags");
-    const ctx = canvas.getContext("2d");
-    let width, height;
-    const flags = [];
-    const flagSrcs = [
-      "https://flagcdn.com/w320/us.png",
-      "https://flagcdn.com/w320/ru.png"
-    ];
-
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    class Flag {
-      constructor(img) {
-        this.img = img;
-        this.x = Math.random() * (width - 200);
-        this.y = Math.random() * (height - 120);
-        this.dx = (Math.random() - 0.5) * 4;
-        this.dy = (Math.random() - 0.5) * 4;
-        this.size = 250;
-      }
-      update() {
-        this.x += this.dx;
-        this.y += this.dy;
-
-        if (this.x < 0 || this.x + this.size > width) this.dx *= -1;
-        if (this.y < 0 || this.y + this.size * 0.6 > height) this.dy *= -1;
-      }
-      draw() {
-        ctx.globalAlpha = 0.35;
-        ctx.drawImage(this.img, this.x, this.y, this.size, this.size * 0.6);
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    function handleCollisions() {
-      for (let i = 0; i < flags.length; i++) {
-        for (let j = i + 1; j < flags.length; j++) {
-          const a = flags[i];
-          const b = flags[j];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const distance = Math.hypot(dx, dy);
-
-          if (distance < a.size * 0.6) {
-            // swap velocities (elastic collision approximation)
-            [a.dx, b.dx] = [b.dx, a.dx];
-            [a.dy, b.dy] = [b.dy, a.dy];
-          }
-        }
-      }
-    }
-
-    Promise.all(flagSrcs.map(src => {
-      return new Promise(res => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => res(img);
-      });
-    })).then(images => {
-      for (let img of images) {
-        flags.push(new Flag(img));
-      }
-      animate();
-    });
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      handleCollisions();
-      for (let flag of flags) {
-        flag.update();
-        flag.draw();
-      }
-      requestAnimationFrame(animate);
-    }
   </script>
 </body>
 </html>
-

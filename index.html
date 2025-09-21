@@ -61,6 +61,102 @@
       font-size: 1em;
       opacity: 0.8;
     }
+
+    /* Brainrot Image Viewer */
+    .brainrot-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .brainrot-container {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .brainrot-image {
+      max-width: 100%;
+      max-height: 80vh;
+      border: 3px solid #fff;
+      border-radius: 8px;
+    }
+
+    .close-brainrot {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: #ff4444;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-brainrot:hover {
+      background: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .brainrot-counter {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.2em;
+      text-align: center;
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 15px;
+      border-radius: 20px;
+      display: none;
+      z-index: 101;
+    }
+
+    .typing-text {
+      color: white;
+      font-size: 1.1em;
+    }
+
+    .typing-dots {
+      display: inline-block;
+      width: 20px;
+    }
+
+    .typing-dots::after {
+      content: '';
+      animation: typingDots 1.5s infinite;
+    }
+
+    @keyframes typingDots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+      100% { content: ''; }
+    }
   </style>
 </head>
 <body>
@@ -70,7 +166,7 @@
     <div class="slide">
       <h1>What Are Proxy Wars?</h1>
       <p>
-        A proxy war is when two powerful nations compete indirectly by supporting different sides in another country’s conflict. 
+        A proxy war is when two powerful nations compete indirectly by supporting different sides in another country's conflict. 
         Instead of fighting each other directly, they give money, weapons, and training. 
         Proxy wars were especially common during the Cold War between the U.S. and the Soviet Union.
       </p>
@@ -112,8 +208,8 @@
         The U.S. sent over half a million troops at the height of the war, making it one of the largest proxy conflicts in history.
       </p>
       <p>
-        The Viet Cong’s guerrilla tactics and the determination of the North Vietnamese proved extremely difficult to overcome. 
-        Despite America’s superior technology, the war dragged on for twenty years and drained U.S. resources, morale, and political stability.
+        The Viet Cong's guerrilla tactics and the determination of the North Vietnamese proved extremely difficult to overcome. 
+        Despite America's superior technology, the war dragged on for twenty years and drained U.S. resources, morale, and political stability.
       </p>
       <p>
         The war ended with the fall of Saigon in 1975 and a communist victory. 
@@ -130,11 +226,11 @@
         The United States, Pakistan, and Saudi Arabia funded and armed the Mujahideen resistance fighters.
       </p>
       <p>
-        The war became known as the "Soviet Union’s Vietnam" because it drained resources, damaged morale, and turned global opinion against Moscow. 
+        The war became known as the "Soviet Union's Vietnam" because it drained resources, damaged morale, and turned global opinion against Moscow. 
         The U.S. supplied weapons like the Stinger missile, which allowed rebels to shoot down Soviet helicopters, changing the tide of battle.
       </p>
       <p>
-        The Soviets eventually withdrew in 1989, a major humiliation that accelerated the USSR’s collapse two years later. 
+        The Soviets eventually withdrew in 1989, a major humiliation that accelerated the USSR's collapse two years later. 
         However, the power vacuum left behind contributed to decades of instability in Afghanistan, eventually giving rise to the Taliban and later global terrorism.
       </p>
       <div class="page-marker">Page 4 / 6</div>
@@ -170,27 +266,203 @@
         where American officials secretly sold weapons to Iran and funneled the money to the Contras, bypassing Congress.
       </p>
       <p>
-        The war left deep divisions in Nicaragua’s politics and economy. 
+        The war left deep divisions in Nicaragua's politics and economy. 
         Although elections eventually brought peace, the scars of the Contra War are still felt today, 
-        showing how Cold War proxy wars shaped Latin America’s political landscape for decades.
+        showing how Cold War proxy wars shaped Latin America's political landscape for decades.
       </p>
       <div class="page-marker">Page 6 / 6</div>
     </div>
   </div>
 
+  <!-- Brainrot Image Viewer -->
+  <div class="brainrot-viewer" id="brainrotViewer">
+    <div class="brainrot-container">
+      <div class="close-brainrot" id="closeBrainrot">X</div>
+      <img class="brainrot-image" id="brainrotImage" src="" alt="Brainrot Image">
+      <div class="brainrot-counter" id="brainrotCounter"></div>
+    </div>
+  </div>
+
   <script>
+    // ----- Brainrot Phrases and Image System -----
+    // Create a mapping of phrases to image numbers
+    const phraseToImageMap = {
+      "skibiditoilet": 100,
+      "ohio": 101,
+      "gyatt": 102,
+      "rizz": 103,
+      "sigma": 104,
+      "fanumtax": 105,
+      "inohio": 106,
+      "skibidi": 107,
+      "whatthedogdoin": 109,
+      "lobotomy": 110,
+      "goofyahh": 111,
+      "quandale": 112,
+      "lukas": 113,
+      "fnf": 114,
+      "vehicle": 115,
+      "man": 116,
+      "jonkler": 117,
+      "schizophrenia": 118,
+      "thevoices": 119,
+      "brainrot": 120,
+      "edgelord": 121,
+      "itssoover": 122,
+      "weresoback": 123,
+      "baddies": 194,
+      "bingchilling": 124,
+      "doyouknowdawae": 125,
+      "nahidwin": 126,
+      "areyoustupid": 127,
+      "theonepieceisreal": 128,
+      "canwegetmuchhigher": 129,
+      "theboykissermeme": 130,
+      "grimaceshake": 131,
+      "strawberryelephant": 132,
+      "jandel": 133,
+      "therock": 134,
+      "npcmeme": 135,
+      "livelaughlove": 136,
+      "sheesh": 137,
+      "bussin": 138,
+      "nocap": 139,
+      "cap": 140,
+      "bet": 141,
+      "slay": 142,
+      "ong": 143,
+      "fr": 144,
+      "goated": 145,
+      "maincharacterenergy": 146,
+      "touchgrass": 147,
+      "homelander": 148,
+      "itsgiving": 149,
+      "imliterallyhim": 150,
+      "pov": 151,
+      "sammy": 152,
+      "ohnah": 153,
+      "fanfic": 154,
+      "wellerman": 155,
+      "ohnosong": 156,
+      "blingblongboy": 157,
+      "doors": 158,
+      "rainbowfriends": 159,
+      "johnpork": 160,
+      "adoptme": 161,
+      "chunkykong": 162,
+      "chains": 163,
+      "davidbaszucki": 164,
+      "schlepsituation": 165,
+      "bloxfruits": 166,
+      "wearenothorses": 167,
+      "wearenothumans": 168,
+      "baconhair": 169,
+      "holymoly": 170,
+      "smashorpass": 171,
+      "roblox": 172,
+      "lankybox": 173,
+      "insanecraft": 174,
+      "flamingo": 175,
+      "catgirl": 176,
+      "dontclickthesound": 177,
+      "ihave10billionpowerinriseofkingdoms": 178,
+      "therizzler": 179,
+      "pullingup": 180,
+      "lethimcook": 181,
+      "wompwomp": 182,
+      "theromanempire": 183,
+      "theworldssmallestviolin": 185,
+      "itsneverthatserious": 186,
+      "goofygoober": 188,
+      "imdeceased": 189,
+      "sleepyjoe": 190,
+      "thematrix": 191,
+      "badkuna": 192,
+      "core": 193,
+      "standproud": 196,
+      "youaremyspecialz": 197,
+      "withthissacredtreasure": 198,
+      "malevolentkitchen": 199,
+      "unlimitedvoid": 200,
+      "domainexpansion": 201,
+      "fraudkuna": 202,
+    };
+
+    const brainrotViewer = document.getElementById('brainrotViewer');
+    const brainrotImage = document.getElementById('brainrotImage');
+    const brainrotCounter = document.getElementById('brainrotCounter');
+    const closeBrainrot = document.getElementById('closeBrainrot');
+    
+    let currentInput = '';
+    let typingTimer = null;
+    
+    // Close brainrot viewer when X is clicked
+    closeBrainrot.addEventListener('click', () => {
+      brainrotViewer.style.display = 'none';
+      currentInput = '';
+    });
+    
+    // Also close if clicking outside the image
+    brainrotViewer.addEventListener('click', (e) => {
+      if (e.target === brainrotViewer) {
+        brainrotViewer.style.display = 'none';
+        currentInput = '';
+      }
+    });
+    
+    // Listen for keyboard input to detect brainrot phrases
+    document.addEventListener('keydown', (e) => {
+      // Only process letter keys
+      if (e.key.length === 1 && e.key.match(/[a-z]/i)) {
+        currentInput += e.key.toLowerCase();
+        
+        // Clear any existing timer
+        if (typingTimer) {
+          clearTimeout(typingTimer);
+        }
+        
+        // Set a new timer for 2 seconds
+        typingTimer = setTimeout(() => {
+          checkForPhraseMatch();
+        }, 2000);
+      }
+    });
+    
+    function checkForPhraseMatch() {
+      // Check if current input matches any brainrot phrase
+      if (phraseToImageMap.hasOwnProperty(currentInput)) {
+        const imageNumber = phraseToImageMap[currentInput];
+        showBrainrotImage(imageNumber);
+      }
+      
+      // Reset input
+      currentInput = '';
+    }
+    
+    function showBrainrotImage(imageNumber) {
+      // Show the viewer
+      brainrotViewer.style.display = 'flex';
+      
+      // Set the image source
+      brainrotImage.src = `${imageNumber}.png`;
+      brainrotCounter.textContent = `${imageNumber}.png`;
+    }
+
     // ----- Slide System -----
     const slides = document.getElementById("slides");
     const totalSlides = document.querySelectorAll(".slide").length;
     let current = 0;
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowDown" && current < totalSlides - 1) {
-        current++;
-        slides.style.transform = `translateY(-${current * 100}vh)`;
-      } else if (e.key === "ArrowUp" && current > 0) {
-        current--;
-        slides.style.transform = `translateY(-${current * 100}vh)`;
+      // Only process arrow keys if brainrot viewer is not visible
+      if (brainrotViewer.style.display !== 'flex') {
+        if (e.key === "ArrowDown" && current < totalSlides - 1) {
+          current++;
+          slides.style.transform = `translateY(-${current * 100}vh)`;
+        } else if (e.key === "ArrowUp" && current > 0) {
+          current--;
+          slides.style.transform = `translateY(-${current * 100}vh)`;
+        }
       }
     });
 
